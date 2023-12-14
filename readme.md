@@ -8,6 +8,10 @@ A cheat sheet for typing in Typescript as I'm learning it.
 - `number`
   - `int` and `float` are just number, JS doesn't know the difference.
 
+## Other basicish types:
+- Literals: `"tomatos"`
+- Enums: `"tomatos" | "eggs" | "bacon"`
+
 
 <br>
 
@@ -36,6 +40,15 @@ function myFunction(myArg1?: string) {
     if (myArg1) {
         console.log("Argument exists.")
     }
+}
+```
+
+<br>
+
+## Function Return Typing
+```typescript
+function myFunction(): string {
+    return "A string"
 }
 ```
 
@@ -97,3 +110,44 @@ function myFunction(car: car) {
 }
 ```
 
+Interesting side note here. If you define the interface as having a thing then it must have that thing
+from the get go. Here's an example.
+```typescript
+type AddTwoNumbersArgs = {
+    first: number;
+    second: number;
+};
+
+export const addTwoNumbers = (params: AddTwoNumbersArgs) => {
+    return params.first + params.second;
+};
+```
+
+This seems to make sense. But means you can't build the interface up typed as you go. 
+This won't work:
+
+```typescript
+
+function getTwoNumbersToAddTogether(): AddTwoNumbersArgs {
+  // This won't work, you need to define those params from the get go.
+  let args: AddTwoNumbersArgs = {}
+  args.first = 1
+  args.second = 2
+
+  // You could define them with dummy values to start with, but this feels unsafe
+  // to me. What if you forget to overwrite?
+  args: AddTwoNumbersArgs = {
+    first: 0,
+    second: 0
+  }
+  args.first = 1
+  args.second = 2
+  
+  // Possibly the better thing to do here is to create an untyped object then unpack it at the end?
+  args = {}
+  args.first = 1
+  args.second = 2
+  args: AddTwoNumbersArgs = {...args}
+}
+
+```
