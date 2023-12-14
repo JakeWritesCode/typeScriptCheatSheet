@@ -9,6 +9,8 @@ A cheat sheet for typing in Typescript as I'm learning it.
   - `int` and `float` are just number, JS doesn't know the difference.
 
 
+<br>
+
 ## How to type stuff
 Pretty much the same as python here.
 
@@ -24,6 +26,8 @@ As a variable:
 let myVariable: string = "Hey variable!"
 ```
 
+<br>
+
 ## Optional Args
 You can make an arg optional like this.
 
@@ -35,6 +39,9 @@ function myFunction(myArg1?: string) {
 }
 ```
 
+<br>
+
+
 ## Arrays
 Just add a square brackets m8.
 ```typescript
@@ -45,6 +52,8 @@ You can also do this if it floats your boat
 ```typescript
 let arrayOfStuff: array<string> = ["An", "array", "of", "strings"]
 ```
+
+<br>
 
 
 ## Typing Objects
@@ -59,6 +68,8 @@ function myFunc(obj: {thing1: string, thing2: string}) {
 
 const myObj: {thing1: string, thing2: string} = new Object({thing1: "test", thing2: "test"})
 ```
+
+<br>
 
 ## Interfaces
 Interfaces are my favourite new thing. They're basically the same as structs in Go or 
