@@ -143,11 +143,87 @@ function getTwoNumbersToAddTogether(): AddTwoNumbersArgs {
   args.first = 1
   args.second = 2
   
-  // Possibly the better thing to do here is to create an untyped object then unpack it at the end?
+  // Possibly the better thing to do here is to create an untyped object then 
+  // unpack it at the end?
+  // Update: Close! Use a record for the untyped object. See Records
   args = {}
   args.first = 1
   args.second = 2
   args: AddTwoNumbersArgs = {...args}
 }
-
 ```
+
+<br>
+
+## Promises
+Promises are a bit weird if you're coming from python and don't do a lot of async python. 
+Essentially a promise is returned from an async function when it hasn't completed yet. This is 
+nice because you can pass it about between functions and only await it when you actually need it.
+
+To type them, same as arrays.
+
+```typescript
+async function getTheThing(): Promise<string> {
+    return "a string"
+}
+```
+
+<br>
+
+## Sets
+Never used sets in JS, so here's a fullish tutorial.
+```typescript
+const guitarists = new Set();
+
+guitarists.add("Jimi Hendrix");
+guitarists.add("Eric Clapton");
+guitarists.delete("Eric Clapton");
+
+const singers = new Set();
+singers.add("Freddie Mercury");
+singers.add("Frank Carter");
+
+guitarists.has("Jimi Hendrix"); // true
+guitarists.entries() // Iterate through set
+guitarists.forEach() // Also iterate
+guitarists.delete("Jimi Hendrix")
+
+// Getting diffs and intersections seems a bit naff. You basically have to iterate.
+const diff = new Set([...singers].filter(x => !guitarists.has(x)));
+const intersection = new Set([...singers].filter(x => guitarists.has(x))); // Lack of !
+```
+
+Finally, to type them:
+```typescript
+const mySet: Set<string> = new Set()
+```
+
+<br>
+
+## Records
+Alright, remember earlier when I said that we should use an untyped object 
+and then unpack it into an interface when we had built it? Well another thing you can
+do is to use a Record.
+
+Essentially a record is a typed dict where you can state the expected type of keys / values.
+```typescript
+const myEmptyRecord: Record<string, number> = {}
+record["thing"] = 2
+recrod["OtherThing"] = 3
+```
+
+<br>
+
+## Getting the type of a thing
+```typescript
+if (typeof "a string" === "string") {
+    // Remember typeof has no brackets and the return is basically an enum of strings
+    // rather than actual objects.
+    return true
+}
+```
+
+
+
+
+
